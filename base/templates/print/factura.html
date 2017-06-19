@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Factura # {{ factura.numero }}</title>
+    <style media="all">
+      .campo{
+        position: absolute;
+        font-size: 12px;
+        font-family: sans-serif;
+      }
+      .numero{
+        top: 10mm;
+        left: 160mm;
+        font-size: 14px;
+        font-weight: 900;
+      }
+      .codigo-cliente{
+        width: 20mm;
+        left: 2mm;
+        top: 18mm;
+      }
+      .nombre-cliente{
+        width: 52mm;
+        left: 21mm;
+        top: 16mm;
+      }
+      .tipo-pago{
+        width: 25mm;
+        left: 74mm;
+        top: 18mm;
+      }
+      .vendedor{
+        width: 25mm;
+        left: 102mm;
+        top: 18mm;
+      }
+      .fecha{
+        width: 20mm;
+        left: 124mm;
+        top: 18mm;
+      }
+      .subtotal1{
+        width: 26mm;
+        left: 124mm;
+        top: 83mm;
+      }
+      .descuento{
+        width: 26mm;
+        left: 124mm;
+        top: 86mm;
+      }
+      .subtotal2{
+        width: 26mm;
+        left: 124mm;
+        top: 89mm;
+      }
+      .impuestos{
+        width: 26mm;
+        left: 124mm;
+        top: 92mm;
+      }
+      .retencion{
+        width: 26mm;
+        left: 124mm;
+        top: 95mm;
+      }
+      .total{
+        width: 26mm;
+        left: 124mm;
+        top: 98mm;
+      }
+      .detalle-codigo{
+        width: 28mm;
+      }
+      .detalle-descripcion{
+        width: 40mm;
+      }
+      .detalle-unidad{
+        width: 20mm;
+      }
+      .detalle-cantidad{
+        width: 12mm;
+      }
+      .detalle-costo{
+        width: 30mm;
+      }
+      .detalle-total{
+        width: 15mm;
+      }
+      .detalle{
+        top: 27mm;
+        left: 3mm;
+        text-align: center;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="campo numero">
+      {{ factura.numero }}
+    </div>
+    <div class="campo codigo-cliente">
+      {{ factura.cliente.id }}
+    </div>
+    <div class="campo nombre-cliente">
+      {{ factura.cliente }}
+    </div>
+    <div class="campo tipo-pago">
+        CREDITO
+    </div>
+    <div class="campo vendedor">
+        VENDEDOR
+    </div>
+    <div class="campo fecha">
+        {{factura.fecha|date:"M d, y H:m:s"}}
+    </div>
+  </body>
+  <div class="campo subtotal1">
+      C$ 1,362.19
+  </div>
+  <div class="campo descuento">
+      C$ 340.55
+  </div>
+  <div class="campo subtotal2">
+      C$ 1,021.65
+  </div>
+  <div class="campo impuestos">
+      C$ 153.25
+  </div>
+  <div class="campo retencion">
+      C$ 0.00
+  </div>
+  <div class="campo total">
+      C$ 1,174.89
+  </div>
+  <table class="campo detalle">
+    {% for d in factura.detalle %}
+    <tr>
+      <td class="detalle-detalle">{{d.producto.codigo}}</td>
+      <td class="detalle-descripcion">{{d.producto.descripcion}}</td>
+      <td class="detalle-unidad">{{d.producto.udm}}</td>
+      <td class="detalle-cantidad">{{d.cantidad}}</td>
+      <td class="detalle-costo">{{d.precio}}</td>
+      <td class="detalle-total">{{d.total}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+</body>
+</html>
